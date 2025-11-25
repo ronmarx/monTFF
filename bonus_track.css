@@ -10,7 +10,7 @@
 
 /* Police Fast Blaze (fichier fastblaze.otf dans le même dossier) */
 @font-face {
-  font-family: "FastBlaze";
+  font-family: "trapeze";
   src: url("trapeze.otf") format("opentype");
   font-display: swap;
 }
@@ -295,4 +295,5 @@ header .subtitle {
     align-items: flex-start;
   }
 }
+
 
