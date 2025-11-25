@@ -8,13 +8,14 @@
   --border-glass: rgba(255, 255, 255, 0.08);
 }
 
-/* Police Fast Blaze (fichier fastblaze.otf dans le même dossier) */
+/* Police BebasKai */
 @font-face {
   font-family: "BebasKai";
   src: url("BebasKai.ttf") format("truetype");
   font-display: swap;
 }
 
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -42,14 +43,14 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0; /* AVANT: -2 -> caché par le background */
+  z-index: 0;
   filter: saturate(1.1) contrast(1.05);
 }
 
 .bg-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1; /* AVANT: -1 */
+  z-index: 1;
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 55%),
     radial-gradient(circle at bottom right, rgba(255, 0, 60, 0.22), transparent 60%),
@@ -59,15 +60,9 @@ body {
 }
 
 @keyframes overlayPulse {
-  0% {
-    opacity: 0.85;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.85;
-  }
+  0% { opacity: 0.85; }
+  50% { opacity: 1; }
+  100% { opacity: 0.85; }
 }
 
 /* ---------- Layout ---------- */
@@ -79,9 +74,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   gap: 1.5rem;
-
   position: relative;
-  z-index: 2; /* au-dessus vidéo + overlay */
+  z-index: 2;
 }
 
 .top-info {
@@ -101,7 +95,10 @@ body {
   margin: 0 auto;
 }
 
+/* ---------- TITRE AVEC BEBASKAI ---------- */
+
 header h1 {
+  font-family: "BebasKai", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(2.1rem, 5vw, 3.25rem);
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -111,6 +108,7 @@ header h1 {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+
   text-shadow:
     0 0 6px rgba(255, 255, 255, 0.45),
     0 0 18px rgba(255, 255, 255, 0.25);
@@ -145,10 +143,10 @@ header .subtitle {
   color: var(--accent-red);
 }
 
-/* ---- PUNCHLINE GRAFFITI ARGENTÉ + EFFET FANTÔME ---- */
+/* ---- PUNCHLINE AVEC BEBASKAI ---- */
 
 .punchline {
-  font-family: "FastBlaze", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "BebasKai", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   text-align: center;
   font-size: clamp(1.7rem, 4vw, 2.4rem);
@@ -166,7 +164,6 @@ header .subtitle {
     0 0 10px rgba(255, 255, 255, 0.45),
     0 0 26px rgba(255, 255, 255, 0.25);
 
-  /* état "fantôme" initial */
   opacity: 0;
   transform: scale(1.06) translateY(10px);
   filter: blur(10px);
@@ -176,7 +173,6 @@ header .subtitle {
     filter 1.4s ease-out;
 }
 
-/* classe ajoutée par bonus_track.js */
 .punchline.punchline-visible {
   opacity: 1;
   transform: scale(1) translateY(0);
@@ -188,7 +184,7 @@ header .subtitle {
   color: var(--text-muted);
 }
 
-/* ---------- Keywords / résumé ---------- */
+/* ---------- Keywords ---------- */
 
 .secondary {
   display: flex;
@@ -282,9 +278,7 @@ header .subtitle {
 /* ---------- Responsive ---------- */
 
 @media (max-width: 640px) {
-  .page {
-    padding: 1.25rem 1rem 1.5rem;
-  }
+  .page { padding: 1.25rem 1rem 1.5rem; }
 
   .punchline {
     font-size: clamp(1.5rem, 6vw, 2.1rem);
@@ -295,4 +289,3 @@ header .subtitle {
     align-items: flex-start;
   }
 }
-
