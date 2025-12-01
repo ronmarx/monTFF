@@ -224,6 +224,1234 @@ body {
 
 /* --- Bulles explicatives pour les mots-clés de la track 1 --- */
 
+/* --- Stockage invisible du texte pour les skills (track 1) --- */
+
+.skill-card {
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On cache les anciennes petites bulles : elles ne servent plus qu’à stocker le texte */
+.skill-tooltip {
+    display: none;
+}
+
+/* Focus clavier (accessibilité) */
+.skill-card:focus-visible {
+    box-shadow: 0 0 0 2px var(--accent);
+    border-radius: 999px;
+}
+
+/* =========================================================
+   MODAL FULL SCREEN POUR LES SKILLS
+   ========================================================= */
+
+.skill-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 200;
+}
+
+.skill-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.skill-modal-content {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--accent);
+    padding: 2rem 2.4rem;
+    width: min(600px, 90%);
+    border-radius: 16px;
+    text-align: center;
+    color: var(--accent);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    position: relative;
+    backdrop-filter: blur(8px);
+}
+
+/* Titre du modal */
+.skill-title {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+/* Texte */
+.skill-description {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Bouton de fermeture (croix) */
+.skill-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.skill-close:hover {
+    opacity: 0.6;
+}
+
+/* Blur du fond de la track 1 quand le modal est ouvert */
+body.modal-open .page-intro {
+    filter: blur(10px);
+    transition: filter 0.25s ease;
+}
+
+
+.intro-anim {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.intro-anim.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   NAVIGATION NEXT / PREVIOUS (toutes les tracks sauf index)
+   ========================================================= */
+
+.track-nav {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.track-btn {
+    padding: 0.6rem 1.6rem;
+    border-radius: 50px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    transition: background-color 0.2s ease, color 0.2s ease,
+                transform 0.15s ease;
+    backdrop-filter: blur(4px);
+}
+
+.track-btn:hover {
+    background-color: var(--accent);
+    color: #050505;
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   EFFET LUMIÈRE SUR LA PHRASE (TRACK 1)
+   ========================================================= */
+
+.shine-text {
+    position: relative;
+    display: inline-block;
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+/* Bande de lumière qui traverse le texte */
+.shine-text::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.0) 35%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0.0) 65%,
+        transparent 100%
+    );
+    pointer-events: none;
+    animation: shine-sweep 4s linear infinite;
+}
+
+/* Animation pas trop rapide */
+@keyframes shine-sweep {
+    0% {
+        left: -120%;
+    }
+    100% {
+        left: 120%;
+    }
+}
+
+/* =========================================================
+   PAGE TRACK 2 : PARCOURS / BIO + BACKGROUND IMAGE
+   ========================================================= */
+
+.page-track2 {
+    min-height: 100vh;
+    position: relative;
+    padding: 3rem 8vw;
+    display: block;
+}
+
+/* Image de fond très légère */
+.page-track2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("backtrack2.png") center/cover no-repeat;
+    opacity: 0.30;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+/* Voile sombre pour lisibilité du texte */
+.page-track2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.20);
+    z-index: 1;
+}
+
+.track2-wrapper,
+.track-nav {
+    position: relative;
+    z-index: 2;
+}
+
+/* Mise en page Track 2 */
+
+.track2-wrapper {
+    max-width: 980px;
+    width: 100%;
+}
+
+.track2-header {
+    margin-bottom: 2.5rem;
+}
+
+.track2-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+.track2-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.track2-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Tracklist */
+
+.tracklist {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.track-item {
+    display: grid;
+    grid-template-columns: minmax(80px, 120px) 1fr;
+    gap: 1.5rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: 14px;
+    background: rgba(10, 10, 10, 0.90);
+    border: 1px solid rgba(29, 185, 84, 0.12);
+    backdrop-filter: blur(4px);
+    position: relative;
+    overflow: hidden;
+}
+
+.track-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(29, 185, 84, 0.10) 40%,
+        transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.track-item:hover::before {
+    opacity: 1;
+}
+
+.track-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.track-number {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.track-years {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.track-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.track-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.track-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.track-desc strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Animation d'apparition pour track 2 */
+
+.track2-anim {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.track2-anim.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE GLOBAL
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .hero-content {
+        justify-content: center;
+        text-align: center;
+        padding: 0 1.5rem;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .intro-title::before {
+        left: -0.8rem;
+        height: 2.2rem;
+    }
+
+    .page-intro {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .track-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .track-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-track2 {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .track-item {
+        grid-template-columns: 1fr;
+    }
+
+    .track-meta {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* =========================================================
+   PAGE TRACK 3 : MICROBUS & OBJECTIF PRO
+   ========================================================= */
+
+.page-track3 {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #10141b 0%, #050608 60%, #020203 100%);
+    padding: 3rem 8vw;
+}
+
+.track3-wrapper {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.track3-header {
+    margin-bottom: 2.5rem;
+}
+
+.track3-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+.track3-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.track3-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Nuage de mots-clés */
+
+.skills-cloud {
+    margin: 2.2rem 0 2.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.skill-pill {
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(3px);
+
+    /* état initial : très zoomé + flou + invisible */
+    opacity: 0;
+    transform: scale(3.5);
+    filter: blur(6px);
+}
+
+/* Animation zoom/fade pour chaque mot clé */
+
+@keyframes keyword-zoom-in {
+    0% {
+        opacity: 0;
+        transform: scale(3.5);
+        filter: blur(6px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(3.5);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+.skill-anim {
+    animation-name: keyword-zoom-in;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+/* Décalage séquentiel */
+
+.skill-anim:nth-child(1) { animation-delay: 0.3s; }
+.skill-anim:nth-child(2) { animation-delay: 0.9s; }
+.skill-anim:nth-child(3) { animation-delay: 1.5s; }
+.skill-anim:nth-child(4) { animation-delay: 2.1s; }
+.skill-anim:nth-child(5) { animation-delay: 2.7s; }
+.skill-anim:nth-child(6) { animation-delay: 3.3s; }
+.skill-anim:nth-child(7) { animation-delay: 3.9s; }
+.skill-anim:nth-child(8) { animation-delay: 4.5s; }
+
+/* Grille Microbus + Objectif */
+
+.microbus-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Bloc Microbus */
+
+.microbus-block {
+    padding: 1.5rem 1.6rem;
+    border-radius: 18px;
+    background: rgba(10, 10, 10, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(4px);
+}
+
+.microbus-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.microbus-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.microbus-list li strong {
+    color: var(--text-main);
+}
+
+.mb-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border-radius: 999px;
+    border: 1px solid rgba(29, 185, 84, 0.35);
+    padding: 0.15rem 0.6rem;
+    margin-right: 0.4rem;
+}
+
+/* Carte “preset objectif” */
+
+.objective-card {
+    padding: 1.5rem 1.6rem;
+    border-radius: 18px;
+    background: radial-gradient(circle at top left,
+                rgba(29, 185, 84, 0.12) 0%,
+                rgba(10, 10, 10, 0.95) 45%,
+                rgba(5, 5, 5, 0.98) 100%);
+    border: 1px solid rgba(29, 185, 84, 0.3);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
+}
+
+.objective-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.preset-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+.preset-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.preset-value {
+    font-weight: 500;
+}
+
+.preset-output {
+    color: var(--accent);
+}
+
+.preset-separator {
+    height: 1px;
+    background: linear-gradient(to right,
+                rgba(255, 255, 255, 0.1),
+                rgba(29, 185, 84, 0.5),
+                rgba(255, 255, 255, 0.1));
+    margin: 0.9rem 0 1.1rem;
+}
+
+.preset-params {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.preset-param {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.param-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+}
+
+.param-value {
+    text-align: right;
+    color: var(--text-main);
+}
+
+.objective-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 1.2rem;
+    line-height: 1.5;
+}
+
+/* Animation d’apparition pour track 3 */
+
+.track3-anim {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.track3-anim.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive track 3 */
+
+@media (max-width: 900px) {
+    .microbus-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-track3 {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+/* =========================================================
+   PAGE TRACK 4 : ADMIN SYSTEMES & CLOUD
+   ========================================================= */
+
+.page-track4 {
+    min-height: 100vh;
+    position: relative;
+    padding: 3rem 8vw;
+    background: radial-gradient(circle at top, #10141b 0%, #050608 60%, #020203 100%);
+}
+
+/* Fond avec illustration backtrack3.png */
+.page-track4::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("backtrack3.png") center/cover no-repeat;
+    opacity: 0.30;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+/* Voile sombre léger par-dessus pour la lisibilité */
+.page-track4::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+
+.track4-wrapper,
+.track4-grid,
+.track4-bridge,
+.track-nav {
+    position: relative;
+    z-index: 2;
+}
+
+.track4-wrapper {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.track4-header {
+    margin-bottom: 2.5rem;
+}
+
+.track4-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+.track4-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.track4-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Grille des cartes métier */
+
+.track4-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.tech-card {
+    padding: 1.5rem 1.6rem;
+    border-radius: 18px;
+    background: rgba(10, 10, 10, 0.95);
+    border: 1px solid rgba(29, 185, 84, 0.18);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.65);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.tech-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-main);
+}
+
+.tech-icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    background: radial-gradient(circle at top left,
+                rgba(29, 185, 84, 0.35),
+                rgba(5, 5, 5, 1));
+}
+
+.tech-text {
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.tech-text strong {
+    color: var(--text-main);
+}
+
+.tech-link-exp {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Petit paragraphe de lien / résumé */
+
+.track4-bridge {
+    margin-bottom: 3rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Animation d’apparition pour track 4 */
+
+.track4-anim {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.track4-anim.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .track4-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-track4 {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+/* =========================================================
+   PAGE TRACK 5 : COMPÉTENCES & VDC (VIDEO BACKGROUND)
+   ========================================================= */
+
+.page-track5 {
+    min-height: 100vh;
+    position: relative;
+    padding: 3rem 8vw;
+    color: var(--text-main);
+    background: #000; /* fallback si la vidéo ne se charge pas */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Vidéo de fond */
+
+.track5-bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Voile sombre par-dessus la vidéo */
+
+.track5-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    z-index: 1;
+}
+
+/* Contenu au-dessus de la vidéo + overlay */
+
+.track5-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.track5-header {
+    margin-bottom: 2.5rem;
+}
+
+.track5-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+.track5-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.track5-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Grille compétences */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.skills-col {
+    padding: 1.5rem 1.6rem;
+    border-radius: 18px;
+    background: rgba(10, 10, 10, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(5px);
+}
+
+.skills-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.skill-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border-radius: 999px;
+    border: 1px solid rgba(29, 185, 84, 0.35);
+    padding: 0.15rem 0.6rem;
+    margin-right: 0.5rem;
+}
+
+.skill-tag.soft {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text-main);
+}
+
+/* Encadré VDC */
+
+.vdc-section {
+    margin-bottom: 3rem;
+}
+
+.vdc-card {
+    padding: 1.6rem 1.7rem;
+    border-radius: 18px;
+    background: radial-gradient(circle at top left,
+                rgba(29, 185, 84, 0.18) 0%,
+                rgba(10, 10, 10, 0.95) 45%,
+                rgba(5, 5, 5, 0.98) 100%);
+    border: 1px solid rgba(29, 185, 84, 0.45);
+    box-shadow: 0 0 22px rgba(0, 0, 0, 0.75);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.vdc-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.vdc-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.vdc-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border-radius: 999px;
+    border: 1px solid rgba(29, 185, 84, 0.6);
+    padding: 0.15rem 0.6rem;
+    flex-shrink: 0;
+}
+
+/* Animation d’apparition Track 5 */
+
+.track5-anim {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.track5-anim.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Track 5 */
+
+@media (max-width: 900px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-track5 {
+        padding: 2.5rem 1.5rem;
+    }
+}
+/* =========================================================
+   VARIABLES (couleurs, typos)
+   ========================================================= */
+:root {
+    --bg-dark: #050608;
+    --text-main: #f5f5f5;
+    --text-muted: #d0d0d0;
+    --accent: #1db954;        /* Vert Spotify en accent */
+    --overlay: rgba(0, 0, 0, 0.55);
+
+    /* Vars communes possibles avec la bonus track */
+    --overlay-dark: rgba(0, 0, 0, 0.65);
+    --accent-red: #ff3b3b;
+    --glass: rgba(5, 6, 8, 0.88);
+    --border-glass: rgba(255, 255, 255, 0.08);
+
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", sans-serif;
+}
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-main);
+    background-color: var(--bg-dark);
+}
+
+/* =========================================================
+   PAGE DE GARDE (HERO PAGE)
+   ========================================================= */
+
+.page-hero {
+    min-height: 100vh;
+    background-image: url("Ron_portrait_1.jpg");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Voile sombre pour lisibilité du texte */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7),
+        var(--overlay)
+    );
+    z-index: 1;
+}
+
+/* Contenu centré verticalement, aligné à droite */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8vw;
+}
+
+.hero-text {
+    max-width: 480px;
+    text-align: left;
+}
+
+/* TYPO HERO */
+
+.hero-title {
+    font-size: clamp(2.8rem, 4vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hero-title .accent {
+    color: var(--accent);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hero-punchline {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* BOUTON "NEXT TRACK" */
+
+.hero-button {
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    transition: background-color 0.2s ease, color 0.2s ease,
+                transform 0.15s ease;
+    backdrop-filter: blur(4px);
+}
+
+.hero-button:hover {
+    background-color: var(--accent);
+    color: #050505;
+    transform: translateY(-1px);
+}
+
+/* ANIMATIONS HERO (JS ajoute .show) */
+
+.hero-title.show,
+.hero-subtitle.show,
+.hero-punchline.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   PAGE TRACK 1 – INTRO & PITCH
+   ========================================================= */
+
+.page-intro {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #14181f 0%, #050608 55%, #020204 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 8vw;
+}
+
+.intro-wrapper {
+    max-width: 900px;
+    width: 100%;
+}
+
+.intro-text {
+    text-align: left;
+}
+
+.intro-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.intro-title::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 0.2rem;
+    width: 4px;
+    height: 2.6rem;
+    background: var(--accent);
+    border-radius: 999px;
+}
+
+.intro-lead {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.intro-lead .accent {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Mots-clés / tags */
+
+.intro-keywords {
+    margin: 1.8rem 0 2.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.keyword-chip {
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(3px);
+}
+
+/* --- Bulles explicatives pour les mots-clés de la track 1 --- */
+
 .skill-card {
     position: relative;
     cursor: default;
@@ -1196,3 +2424,4 @@ body {
         padding: 2.5rem 1.5rem;
     }
 }
+
