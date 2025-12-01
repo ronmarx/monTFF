@@ -21,12 +21,6 @@
   margin: 0;
   padding: 0;
 }
-.footer-text-strong {
-  font-size: 1.2rem;      /* augmente la taille */
-  font-weight: 700;     /* gras */
-  color: var(--text-main);  /* pour être sûr que ça reste lisible */
-}
-
 
 html,
 body {
@@ -237,6 +231,7 @@ header .subtitle {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .nav-btn {
@@ -295,4 +290,34 @@ header .subtitle {
     align-items: flex-start;
   }
 }
+.footer-text-strong {
+  font-size: 1.2rem;      
+  font-weight: 700;     
+  color: var(--text-main);  
+}
+/* =========================================================
+   EMAIL FIXE BAS GAUCHE (TOUTES PAGES)
+   ========================================================= */
+
+.footer-email {
+    position: fixed;
+    bottom: 12px;
+    left: 14px;
+
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+
+    opacity: 0.65;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    z-index: 99999;
+}
+
+.footer-email:hover {
+    opacity: 1;
+    color: var(--accent); /* ton vert Spotify */
+    text-decoration: underline;
+}
+
 
