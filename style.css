@@ -1226,31 +1226,5 @@ body.modal-open .page-intro {
         padding: 2.5rem 1.5rem;
     }
 }
-/* =========================================================
-   /* =========================================================
-   EMAIL CENTRÉ BAS DE PAGE (TOUTES PAGES)
-   ========================================================= */
-
-.footer-email {
-    position: fixed;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    font-size: 0.95rem;     /* un peu plus grand */
-    color: #3b82f6;         /* bleu propre (équivalent Tailwind "blue-500") */
-    text-decoration: none;
-    letter-spacing: 0.03em;
-
-    opacity: 0.75;
-    transition: opacity 0.25s ease, color 0.25s ease;
-    z-index: 99999;
-}
-
-.footer-email:hover {
-    opacity: 1;
-    color: #60a5fa;         /* bleu plus clair au hover */
-    text-decoration: underline;
-}
 
 
