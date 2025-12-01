@@ -295,8 +295,7 @@ header .subtitle {
   font-weight: 700;     
   color: var(--text-main);  
 }
-/* =========================================================
-  /* =========================================================
+/* /* =========================================================
    EMAIL CENTRÉ BAS DE PAGE (TOUTES PAGES)
    ========================================================= */
 
@@ -321,5 +320,6 @@ header .subtitle {
     color: #60a5fa;         /* bleu plus clair au hover */
     text-decoration: underline;
 }
+
 
 
