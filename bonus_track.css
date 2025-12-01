@@ -21,6 +21,12 @@
   margin: 0;
   padding: 0;
 }
+.footer-text-strong {
+  font-size: 1.2rem;      /* augmente la taille */
+  font-weight: 700;     /* gras */
+  color: var(--text-main);  /* pour être sûr que ça reste lisible */
+}
+
 
 html,
 body {
@@ -289,3 +295,4 @@ header .subtitle {
     align-items: flex-start;
   }
 }
+
