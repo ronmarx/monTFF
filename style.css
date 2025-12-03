@@ -1031,11 +1031,10 @@ body.modal-open .page-intro {
 .page-track5 {
     min-height: 100vh;
     position: relative;
-    padding: 3rem 8vw;
+    padding: 2rem 6vw 2rem;   /* moins de padding */
     color: var(--text-main);
-    background: #000; /* fallback si la vidéo ne se charge pas */
+    background: #000;         /* fallback si la vidéo ne se charge pas */
     overflow-x: hidden;
-    overflow-y: auto;
 }
 
 /* Vidéo de fond */
@@ -1064,13 +1063,19 @@ body.modal-open .page-intro {
     position: relative;
     z-index: 2;
     max-width: 980px;
+    width: 100%;
     margin: 0 auto;
+
+    /* pour répartir le contenu sur toute la hauteur */
+    min-height: calc(100vh - 4rem); /* padding haut + bas ≈ 4rem */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header */
+/* Header plus compact */
 
 .track5-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .track5-label {
@@ -1078,62 +1083,62 @@ body.modal-open .page-intro {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--accent);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
 }
 
 .track5-title {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
     font-weight: 600;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
 }
 
 .track5-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
 }
 
-/* Grille compétences */
+/* Grille compétences plus serrée */
 
 .skills-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 2rem;
-    margin-bottom: 2.5rem;
+    gap: 1.4rem;
+    margin-bottom: 1.4rem;
 }
 
 .skills-col {
-    padding: 1.5rem 1.6rem;
-    border-radius: 18px;
+    padding: 1.1rem 1.2rem;
+    border-radius: 16px;
     background: rgba(10, 10, 10, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(5px);
 }
 
 .skills-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
 }
 
 .skills-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-    font-size: 0.95rem;
+    gap: 0.55rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
 }
 
 .skill-tag {
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--accent);
     border-radius: 999px;
     border: 1px solid rgba(29, 185, 84, 0.35);
-    padding: 0.15rem 0.6rem;
-    margin-right: 0.5rem;
+    padding: 0.12rem 0.55rem;
+    margin-right: 0.45rem;
 }
 
 .skill-tag.soft {
@@ -1141,46 +1146,46 @@ body.modal-open .page-intro {
     color: var(--text-main);
 }
 
-/* Encadré VDC */
+/* Encadré VDC plus court */
 
 .vdc-section {
-    margin-bottom: 3rem;
+    margin-bottom: 1.3rem;
 }
 
 .vdc-card {
-    padding: 1.6rem 1.7rem;
-    border-radius: 18px;
+    padding: 1.2rem 1.3rem;
+    border-radius: 16px;
     background: radial-gradient(circle at top left,
                 rgba(29, 185, 84, 0.18) 0%,
                 rgba(10, 10, 10, 0.95) 45%,
                 rgba(5, 5, 5, 0.98) 100%);
     border: 1px solid rgba(29, 185, 84, 0.45);
-    box-shadow: 0 0 22px rgba(0, 0, 0, 0.75);
-    font-size: 0.95rem;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.75);
+    font-size: 0.9rem;
     color: var(--text-muted);
 }
 
 .vdc-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
 }
 
 .vdc-line {
     display: flex;
     align-items: flex-start;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
 }
 
 .vdc-tag {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--accent);
     border-radius: 999px;
     border: 1px solid rgba(29, 185, 84, 0.6);
-    padding: 0.15rem 0.6rem;
+    padding: 0.12rem 0.5rem;
     flex-shrink: 0;
 }
 
@@ -1197,6 +1202,12 @@ body.modal-open .page-intro {
     transform: translateY(0);
 }
 
+/* Nav spécifique track 5 : moins de marge au-dessus */
+
+.page-track5 .track-nav {
+    margin-top: 1.1rem;
+}
+
 /* Responsive Track 5 */
 
 @media (max-width: 900px) {
@@ -1207,6 +1218,12 @@ body.modal-open .page-intro {
 
 @media (max-width: 768px) {
     .page-track5 {
-        padding: 2.5rem 1.5rem;
+        padding: 1.5rem 1.4rem;
     }
+
+    .track5-wrapper {
+        min-height: calc(100vh - 3rem);
+    }
+}
+
 }
